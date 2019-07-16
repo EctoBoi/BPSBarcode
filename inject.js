@@ -2,10 +2,10 @@
 (function () {
 
 	window.onload = function () {
-		//inject();
-		let skuSpan = document.getElementsByTagName("BODY")[0];
+		let body = document.getElementsByTagName("BODY")[0];
+		//let sku = document.getElementsByClassName("sku")[0];
 
-		skuSpan.onclick = function () { inject() };
+		body.addEventListener('mousemove', function () { inject() });
 	}
 
 })();
@@ -22,9 +22,15 @@ function inject() {
 
 		document.getElementsByClassName('top namePartPriceContainer')[1].appendChild(div);
 	}
-	let height;
-	chrome.storage.sync.get('height', function (data) {
-		height = data.height;
-		JsBarcode("#barcode", sku, { height: height });
-	});
+	let lastSku = 'q'
+	chrome.storage.sync.get('lastSku', function (data) {
+		lastSku = data.lastSku;
+		if (sku !== lastSku) {
+			chrome.storage.sync.get('height', function (data) {
+				JsBarcode("#barcode", sku, { height: data.height });
+				chrome.storage.sync.set({ lastSku: sku });
+			});
+		}
+	})
+
 }

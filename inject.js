@@ -13,6 +13,7 @@
 
 function inject() {
 	let sku = document.getElementsByClassName("sku")[0].innerHTML.match(/\d/g).join('')
+	let barcodeCreated = false;	
 
 	if (!document.getElementById('barcode')) {
 		let div = document.createElement('div');
@@ -21,11 +22,12 @@ function inject() {
 		div.appendChild(svg)
 
 		document.getElementsByClassName('top namePartPriceContainer')[1].appendChild(div);
+		barcodeCreated = true;
 	}
 	let lastSku = 'q'
 	chrome.storage.sync.get('lastSku', function (data) {
 		lastSku = data.lastSku;
-		if (sku !== lastSku) {
+		if (sku !== lastSku || barcodeCreated) {
 			chrome.storage.sync.get('height', function (data) {
 				JsBarcode("#barcode", sku, { height: data.height });
 				chrome.storage.sync.set({ lastSku: sku });

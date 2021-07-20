@@ -18,7 +18,7 @@
       "matches": [
         "https://www.basspro.com/*"
       ],
-      "run_at": "document_idle",
+      "run_at": "document_end",
       "js": [
         "JsBarcode.all.min.js",
         "inject.js"

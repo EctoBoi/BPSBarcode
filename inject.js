@@ -2,8 +2,7 @@
 (function () {
 
 	window.onload = function () {
-		try{
-						
+		try{	
 			inject();
 		}catch(error) {
 

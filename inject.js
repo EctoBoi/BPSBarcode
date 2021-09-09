@@ -2,7 +2,7 @@
 (function () {
 
 	window.onload = function () {
-		try{	
+		try{			
 			inject();
 		}catch(error) {
 
@@ -17,6 +17,7 @@
 
 
 function inject() {
+	if(document.documentElement.innerHTML.match(/firstSkuImage.+;/g)!=null)
 	if(typeof document.getElementsByClassName("sku")[0] !== "undefined"){
 		const firstSkuImage = document.documentElement.innerHTML.match(/firstSkuImage.+;/g)[0]
 		let sku = firstSkuImage.substring(firstSkuImage.indexOf('/')+1,firstSkuImage.indexOf('_'))	

@@ -1,4 +1,3 @@
-
 (function () {
 
 	window.onload = function () {
@@ -17,10 +16,11 @@
 
 
 function inject() {
-	if(document.documentElement.innerHTML.match(/firstSkuImage.+;/g)!=null)
+	const regex = new RegExp('basspro.scene7.com/is/image/BassPro/.+_','g')
+	if(document.documentElement.innerHTML.match(regex)!=null)
 	if(typeof document.getElementsByClassName("sku")[0] !== "undefined"){
-		const firstSkuImage = document.documentElement.innerHTML.match(/firstSkuImage.+;/g)[0]
-		let sku = firstSkuImage.substring(firstSkuImage.indexOf('/')+1,firstSkuImage.indexOf('_'))	
+		const firstImage = document.documentElement.innerHTML.match(regex)[0]
+		let sku = firstImage.substring(firstImage.lastIndexOf('/')+1,firstImage.indexOf('_'))	
 	
 		let barcodeCreated = false;	
 

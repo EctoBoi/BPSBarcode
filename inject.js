@@ -3,6 +3,7 @@
 
 	window.onload = function () {
 		try{
+						
 			inject();
 		}catch(error) {
 
@@ -10,7 +11,6 @@
 		
 		let body = document.getElementsByTagName("BODY")[0];
 		//let sku = document.getElementsByClassName("sku")[0];
-
 		body.addEventListener('mousemove', function () { inject() });
 	}
 
@@ -18,10 +18,9 @@
 
 
 function inject() {
-	let regex = RegExp('\\d');
-	if(typeof document.getElementsByClassName("sku")[0] !== "undefined")
-	if(regex.test(document.getElementsByClassName("sku")[0].innerHTML)){
-		let sku = document.getElementsByClassName("sku")[0].innerHTML.match(/\d/g).join('')	
+	if(typeof document.getElementsByClassName("sku")[0] !== "undefined"){
+		const firstSkuImage = document.documentElement.innerHTML.match(/firstSkuImage.+;/g)[0]
+		let sku = firstSkuImage.substring(firstSkuImage.indexOf('/')+1,firstSkuImage.indexOf('_'))	
 	
 		let barcodeCreated = false;	
 
